@@ -1,0 +1,10 @@
+# ninja log v5
+1	81	1732485070245907991	build.ninja	a65b2263e48664a3
+0	191	1732485070445610660	CMakeFiles/WildDex.dir/main.cpp.o	b76051d1c20b5653
+0	191	1732485070445618910	CMakeFiles/WildDex.dir/redListScraper.cpp.o	47b3a2a03f2bc699
+0	579	1732485070831692303	CMakeFiles/WildDex.dir/maxHeap.cpp.o	8875c92fbdc1d795
+0	634	1732485070887276843	CMakeFiles/WildDex.dir/minHeap.cpp.o	13172cbc7bfdee26
+3	49	1732485130076637538	CMakeFiles/WildDex.dir/maxHeap.cpp.o	8875c92fbdc1d795
+50	104	1732485130130990989	WildDex	307e59ef481a9e11
+3	590	1732485695510266048	CMakeFiles/WildDex.dir/minHeap.cpp.o	13172cbc7bfdee26
+2	592	1732485695509683420	CMakeFiles/WildDex.dir/maxHeap.cpp.o	8875c92fbdc1d795
