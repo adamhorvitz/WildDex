@@ -7,7 +7,6 @@ include_directories(.)
 
 add_executable(WildDex
         main.cpp
-        maxHeap.h
         maxHeap.cpp
-        minHeap.h
-        minHeap.cpp)
+        minHeap.cpp
+        redListScraper.cpp)
