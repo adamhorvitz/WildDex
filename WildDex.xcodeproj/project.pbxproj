@@ -11,6 +11,10 @@
 		C938E9EA2CF3DD5000B33F31 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938E9E92CF3DD5000B33F31 /* ContentView.swift */; };
 		C938E9EC2CF3DD5100B33F31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C938E9EB2CF3DD5100B33F31 /* Assets.xcassets */; };
 		C938E9EF2CF3DD5100B33F31 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C938E9EE2CF3DD5100B33F31 /* Preview Assets.xcassets */; };
+		C938E9FA2CF3DFDA00B33F31 /* redListScraper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C938E9F62CF3DFDA00B33F31 /* redListScraper.cpp */; };
+		C938E9FB2CF3DFDA00B33F31 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C938E9F72CF3DFDA00B33F31 /* main.cpp */; };
+		C938E9FC2CF3DFDA00B33F31 /* maxHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C938E9F82CF3DFDA00B33F31 /* maxHeap.cpp */; };
+		C938E9FD2CF3DFDA00B33F31 /* minHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C938E9F92CF3DFDA00B33F31 /* minHeap.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,11 @@
 		C938E9E92CF3DD5000B33F31 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C938E9EB2CF3DD5100B33F31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C938E9EE2CF3DD5100B33F31 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C938E9F52CF3DFD900B33F31 /* WildDex-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WildDex-Bridging-Header.h"; sourceTree = "<group>"; };
+		C938E9F62CF3DFDA00B33F31 /* redListScraper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = redListScraper.cpp; path = WildDex/redListScraper.cpp; sourceTree = SOURCE_ROOT; };
+		C938E9F72CF3DFDA00B33F31 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = WildDex/main.cpp; sourceTree = SOURCE_ROOT; };
+		C938E9F82CF3DFDA00B33F31 /* maxHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = maxHeap.cpp; path = WildDex/maxHeap.cpp; sourceTree = SOURCE_ROOT; };
+		C938E9F92CF3DFDA00B33F31 /* minHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = minHeap.cpp; path = WildDex/minHeap.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +60,11 @@
 		C938E9E62CF3DD5000B33F31 /* WildDex */ = {
 			isa = PBXGroup;
 			children = (
+				C938E9F72CF3DFDA00B33F31 /* main.cpp */,
+				C938E9F82CF3DFDA00B33F31 /* maxHeap.cpp */,
+				C938E9F92CF3DFDA00B33F31 /* minHeap.cpp */,
+				C938E9F62CF3DFDA00B33F31 /* redListScraper.cpp */,
+				C938E9F52CF3DFD900B33F31 /* WildDex-Bridging-Header.h */,
 				C938E9E72CF3DD5000B33F31 /* WildDexApp.swift */,
 				C938E9E92CF3DD5000B33F31 /* ContentView.swift */,
 				C938E9EB2CF3DD5100B33F31 /* Assets.xcassets */,
@@ -99,6 +113,7 @@
 				TargetAttributes = {
 					C938E9E32CF3DD5000B33F31 = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
 					};
 				};
 			};
@@ -138,6 +153,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C938E9EA2CF3DD5000B33F31 /* ContentView.swift in Sources */,
+				C938E9FC2CF3DFDA00B33F31 /* maxHeap.cpp in Sources */,
+				C938E9FA2CF3DFDA00B33F31 /* redListScraper.cpp in Sources */,
+				C938E9FB2CF3DFDA00B33F31 /* main.cpp in Sources */,
+				C938E9FD2CF3DFDA00B33F31 /* minHeap.cpp in Sources */,
 				C938E9E82CF3DD5000B33F31 /* WildDexApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +288,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WildDex/Preview Content\"";
@@ -287,6 +307,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = AnimalLovers.WildDex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WildDex/Preview Content/WildDex-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -297,6 +319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WildDex/Preview Content\"";
@@ -315,6 +338,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = AnimalLovers.WildDex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WildDex/Preview Content/WildDex-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
