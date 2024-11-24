@@ -14,8 +14,18 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+                .onTapGesture {
+                    testing()
+                }
         }
         .padding()
+    }
+    
+    func testing() {
+        let test = MaxHeap()
+        if test.isEmpty() {
+            print("heap is empty!!")
+        }
     }
 }
 
