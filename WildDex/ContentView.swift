@@ -9,16 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-                .onTapGesture {
-                    testing()
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+            Text("map view")
+                .tabItem {
+                    Label("Map", systemImage: "house.fill")
+                }
+            Text("favorites view")
+                .tabItem {
+                    Label("Favorites", systemImage: "house.fill")
+                }
+            Text("community view")
+                .tabItem {
+                    Label("Community", systemImage: "house.fill")
                 }
         }
-        .padding()
     }
     
     func testing() {
