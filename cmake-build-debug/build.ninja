@@ -49,33 +49,33 @@ cmake_ninja_workdir = /Users/adamhorvitz/Documents/GitHub/WildDex/cmake-build-de
 
 build cmake_object_order_depends_target_WildDex: phony || CMakeFiles/WildDex.dir
 
-build CMakeFiles/WildDex.dir/main.cpp.o: CXX_COMPILER__WildDex_unscanned_Debug /Users/adamhorvitz/Documents/GitHub/WildDex/main.cpp || cmake_object_order_depends_target_WildDex
-  DEP_FILE = CMakeFiles/WildDex.dir/main.cpp.o.d
+build CMakeFiles/WildDex.dir/WildDex/main.cpp.o: CXX_COMPILER__WildDex_unscanned_Debug /Users/adamhorvitz/Documents/GitHub/WildDex/WildDex/main.cpp || cmake_object_order_depends_target_WildDex
+  DEP_FILE = CMakeFiles/WildDex.dir/WildDex/main.cpp.o.d
   FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/adamhorvitz/Documents/GitHub/WildDex/.
   OBJECT_DIR = CMakeFiles/WildDex.dir
-  OBJECT_FILE_DIR = CMakeFiles/WildDex.dir
+  OBJECT_FILE_DIR = CMakeFiles/WildDex.dir/WildDex
 
-build CMakeFiles/WildDex.dir/maxHeap.cpp.o: CXX_COMPILER__WildDex_unscanned_Debug /Users/adamhorvitz/Documents/GitHub/WildDex/maxHeap.cpp || cmake_object_order_depends_target_WildDex
-  DEP_FILE = CMakeFiles/WildDex.dir/maxHeap.cpp.o.d
+build CMakeFiles/WildDex.dir/WildDex/maxHeap.cpp.o: CXX_COMPILER__WildDex_unscanned_Debug /Users/adamhorvitz/Documents/GitHub/WildDex/WildDex/maxHeap.cpp || cmake_object_order_depends_target_WildDex
+  DEP_FILE = CMakeFiles/WildDex.dir/WildDex/maxHeap.cpp.o.d
   FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/adamhorvitz/Documents/GitHub/WildDex/.
   OBJECT_DIR = CMakeFiles/WildDex.dir
-  OBJECT_FILE_DIR = CMakeFiles/WildDex.dir
+  OBJECT_FILE_DIR = CMakeFiles/WildDex.dir/WildDex
 
-build CMakeFiles/WildDex.dir/minHeap.cpp.o: CXX_COMPILER__WildDex_unscanned_Debug /Users/adamhorvitz/Documents/GitHub/WildDex/minHeap.cpp || cmake_object_order_depends_target_WildDex
-  DEP_FILE = CMakeFiles/WildDex.dir/minHeap.cpp.o.d
+build CMakeFiles/WildDex.dir/WildDex/minHeap.cpp.o: CXX_COMPILER__WildDex_unscanned_Debug /Users/adamhorvitz/Documents/GitHub/WildDex/WildDex/minHeap.cpp || cmake_object_order_depends_target_WildDex
+  DEP_FILE = CMakeFiles/WildDex.dir/WildDex/minHeap.cpp.o.d
   FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/adamhorvitz/Documents/GitHub/WildDex/.
   OBJECT_DIR = CMakeFiles/WildDex.dir
-  OBJECT_FILE_DIR = CMakeFiles/WildDex.dir
+  OBJECT_FILE_DIR = CMakeFiles/WildDex.dir/WildDex
 
-build CMakeFiles/WildDex.dir/redListScraper.cpp.o: CXX_COMPILER__WildDex_unscanned_Debug /Users/adamhorvitz/Documents/GitHub/WildDex/redListScraper.cpp || cmake_object_order_depends_target_WildDex
-  DEP_FILE = CMakeFiles/WildDex.dir/redListScraper.cpp.o.d
+build CMakeFiles/WildDex.dir/WildDex/redListScraper.cpp.o: CXX_COMPILER__WildDex_unscanned_Debug /Users/adamhorvitz/Documents/GitHub/WildDex/WildDex/redListScraper.cpp || cmake_object_order_depends_target_WildDex
+  DEP_FILE = CMakeFiles/WildDex.dir/WildDex/redListScraper.cpp.o.d
   FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/adamhorvitz/Documents/GitHub/WildDex/.
   OBJECT_DIR = CMakeFiles/WildDex.dir
-  OBJECT_FILE_DIR = CMakeFiles/WildDex.dir
+  OBJECT_FILE_DIR = CMakeFiles/WildDex.dir/WildDex
 
 
 # =============================================================================
@@ -85,7 +85,7 @@ build CMakeFiles/WildDex.dir/redListScraper.cpp.o: CXX_COMPILER__WildDex_unscann
 #############################################
 # Link the executable WildDex
 
-build WildDex: CXX_EXECUTABLE_LINKER__WildDex_Debug CMakeFiles/WildDex.dir/main.cpp.o CMakeFiles/WildDex.dir/maxHeap.cpp.o CMakeFiles/WildDex.dir/minHeap.cpp.o CMakeFiles/WildDex.dir/redListScraper.cpp.o
+build WildDex: CXX_EXECUTABLE_LINKER__WildDex_Debug CMakeFiles/WildDex.dir/WildDex/main.cpp.o CMakeFiles/WildDex.dir/WildDex/maxHeap.cpp.o CMakeFiles/WildDex.dir/WildDex/minHeap.cpp.o CMakeFiles/WildDex.dir/WildDex/redListScraper.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk
   OBJECT_DIR = CMakeFiles/WildDex.dir
   POST_BUILD = :
