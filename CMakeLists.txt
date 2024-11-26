@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(WildDex
-        main.cpp
-        maxHeap.cpp
-        minHeap.cpp
-        redListScraper.cpp)
+        WildDex/main.cpp
+        WildDex/maxHeap.cpp
+        WildDex/minHeap.cpp
+        WildDex/redListScraper.cpp)
