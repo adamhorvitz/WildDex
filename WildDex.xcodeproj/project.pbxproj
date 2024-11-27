@@ -15,8 +15,25 @@
 		C938E9FB2CF3DFDA00B33F31 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C938E9F72CF3DFDA00B33F31 /* main.cpp */; };
 		C938E9FC2CF3DFDA00B33F31 /* maxHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C938E9F82CF3DFDA00B33F31 /* maxHeap.cpp */; };
 		C938E9FD2CF3DFDA00B33F31 /* minHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C938E9F92CF3DFDA00B33F31 /* minHeap.cpp */; };
+		C93E47202CF7DAF300B5EBC7 /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93E471F2CF7DAF300B5EBC7 /* curl.xcframework */; };
+		C93E47212CF7DAF300B5EBC7 /* curl.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C93E471F2CF7DAF300B5EBC7 /* curl.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C970A0482CF3F0FB005E81A0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C970A0472CF3F0FB005E81A0 /* HomeView.swift */; };
+		C996E4062CF7E67500C47795 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C996E4052CF7E67500C47795 /* libz.tbd */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C93E47222CF7DAF300B5EBC7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C93E47212CF7DAF300B5EBC7 /* curl.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C938E9E42CF3DD5000B33F31 /* WildDex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildDex.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,7 +46,9 @@
 		C938E9F72CF3DFDA00B33F31 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = WildDex/main.cpp; sourceTree = SOURCE_ROOT; };
 		C938E9F82CF3DFDA00B33F31 /* maxHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = maxHeap.cpp; path = WildDex/maxHeap.cpp; sourceTree = SOURCE_ROOT; };
 		C938E9F92CF3DFDA00B33F31 /* minHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = minHeap.cpp; path = WildDex/minHeap.cpp; sourceTree = SOURCE_ROOT; };
+		C93E471F2CF7DAF300B5EBC7 /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = curl.xcframework; path = ../../Downloads/curl.xcframework; sourceTree = "<group>"; };
 		C970A0472CF3F0FB005E81A0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C996E4052CF7E67500C47795 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C996E4062CF7E67500C47795 /* libz.tbd in Frameworks */,
+				C93E47202CF7DAF300B5EBC7 /* curl.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				C938E9E62CF3DD5000B33F31 /* WildDex */,
+				C93E471E2CF7DAF200B5EBC7 /* Frameworks */,
 				C938E9E52CF3DD5000B33F31 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +106,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		C93E471E2CF7DAF200B5EBC7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C996E4052CF7E67500C47795 /* libz.tbd */,
+				C93E471F2CF7DAF300B5EBC7 /* curl.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -94,6 +125,7 @@
 				C938E9E02CF3DD5000B33F31 /* Sources */,
 				C938E9E12CF3DD5000B33F31 /* Frameworks */,
 				C938E9E22CF3DD5000B33F31 /* Resources */,
+				C93E47222CF7DAF300B5EBC7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -206,7 +238,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				FRAMEWORK_SEARCH_PATHS = /Users/lexline/Documents/WildDex/WildDex/maxHeap.cpp;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -271,7 +303,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				FRAMEWORK_SEARCH_PATHS = /Users/lexline/Documents/WildDex/WildDex/maxHeap.cpp;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -38,7 +38,7 @@ string makeRequest(const string& url) {
     return response;
 }
 
-int main() {
+int apifetch() {
     // DO NOT COMMIT THIS
     const string apiToken = "placeholder";
 
