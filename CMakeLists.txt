@@ -10,3 +10,7 @@ add_executable(WildDex
         WildDex/maxHeap.cpp
         WildDex/minHeap.cpp
         WildDex/redListScraper.cpp)
+
+find_package(CURL REQUIRED)
+target_include_directories(WildDex PRIVATE ${CURL_INCLUDE_DIRS})
+target_link_libraries(WildDex PRIVATE ${CURL_LIBRARIES})

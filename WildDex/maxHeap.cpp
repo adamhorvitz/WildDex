@@ -12,11 +12,11 @@ using namespace std;
 
 struct Species { // Structure for Species
     string name;
-    int priority;
+    int count;
 
     // Overload < operator for easier comparison
     bool operator<(const Species& other) const {
-        return priority < other.priority;
+        return count < other.count;
     }
 };
 
@@ -27,7 +27,7 @@ private:
     void heapifyUp(int index) { // Heapify up function
         while (index > 0) {
             int parentIndex = (index - 1) / 2;
-            if (heap[parentIndex].priority < heap[index].priority) { // Compare priorities
+            if (heap[parentIndex].count < heap[index].count) { // Compare priorities
                 swap(heap[parentIndex], heap[index]);
                 index = parentIndex;
             } else {
@@ -43,10 +43,10 @@ private:
             int leftChild = 2 * index + 1;
             int rightChild = 2 * index + 2;
 
-            if (leftChild < size && heap[leftChild].priority > heap[largest].priority) {
+            if (leftChild < size && heap[leftChild].count > heap[largest].count) {
                 largest = leftChild;
             }
-            if (rightChild < size && heap[rightChild].priority > heap[largest].priority) {
+            if (rightChild < size && heap[rightChild].count > heap[largest].count) {
                 largest = rightChild;
             }
 
@@ -65,7 +65,7 @@ public:
         heapifyUp(heap.size() - 1);
     }
 
-    Species extractMax() { // Extract the Species with the highest priority
+    Species extractMax() { // Extract the Species with the highest count
         if (heap.empty()) {
             throw runtime_error("Heap is empty");
         }
