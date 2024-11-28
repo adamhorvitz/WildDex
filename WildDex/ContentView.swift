@@ -16,23 +16,16 @@ struct ContentView: View {
                 }
             Text("map view")
                 .tabItem {
-                    Label("Map", systemImage: "house.fill")
+                    Label("Map", systemImage: "map.fill")
                 }
             Text("favorites view")
                 .tabItem {
-                    Label("Favorites", systemImage: "house.fill")
+                    Label("Favorites", systemImage: "star.fill")
                 }
             Text("community view")
                 .tabItem {
-                    Label("Community", systemImage: "house.fill")
+                    Label("Community", systemImage: "person.3.fill")
                 }
-        }
-    }
-    
-    func testing() {
-        let test = MaxHeap()
-        if test.isEmpty() {
-            print("heap is empty!!")
         }
     }
 }
