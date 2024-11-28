@@ -1,28 +1,17 @@
-#include <iostream>
-#include <string>
-#include <curl/curl.h>
-#include <vector>
-#include "maxHeap.cpp"
-#include "json.hpp"
+#include "redListScraper.h"
 
-// CITATION: IUCN 2024. IUCN Red List of Threatened Species. Version 2024-2 <www.iucnredlist.org>
-
-// For convenience :)
-using json = nlohmann::json;
-using namespace std;
-
-// Callback function for cURL (taken from Google)
-size_t WriteCallback(void* contents, size_t size, size_t nmemb, string* output) {
+// Callback function for cURL to handle response data
+size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* output) {
     size_t totalSize = size * nmemb;
-    output->append((char*)contents, totalSize);
+    output->append(static_cast<char*>(contents), totalSize);
     return totalSize;
 }
 
-// Function to make GET requests (also taken from Google lol)
-string makeRequest(const string& url) {
+// Function to make HTTP GET requests using cURL
+std::string makeRequest(const std::string& url) {
     CURL* curl;
     CURLcode res;
-    string response;
+    std::string response;
 
     curl = curl_easy_init();
     if (curl) {
@@ -30,51 +19,58 @@ string makeRequest(const string& url) {
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
         res = curl_easy_perform(curl);
-        curl_easy_cleanup(curl);
         if (res != CURLE_OK) {
-            cerr << "cURL error: " << curl_easy_strerror(res) << endl;
+            std::cerr << "cURL error: " << curl_easy_strerror(res) << std::endl;
         }
+        curl_easy_cleanup(curl);
     }
     return response;
 }
 
-int apifetch() {
-    // DO NOT COMMIT THIS
-    const string apiToken = "placeholder";
+// Function to fetch and process species data from the IUCN API
+int fetchRedListData(const std::string& apiToken) {
+    // Construct API URL with token
+    const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/species/category/CR?token=" + apiToken;
 
-    // API endpoint to list species (NOT WORKING WITH V4)
-    const string apiUrl = "https://apiv3.iucnredlist.org/api/v3/species/category/CR?token=" + apiToken;
-
-    cout << "Fetching data from IUCN Red List API..." << endl;
+    std::cout << "Fetching data from IUCN Red List API..." << std::endl;
 
     // Fetch data
-    string jsonResponse = makeRequest(apiUrl);
+    std::string jsonResponse = makeRequest(apiUrl);
     if (jsonResponse.empty()) {
-        cerr << "Failed to fetch data from API." << endl;
+        std::cerr << "Failed to fetch data from API." << std::endl;
         return 1;
     }
-    // Parse JSON
-    json parsedData = json::parse(jsonResponse);
 
+    // Parse JSON response
+    json parsedData;
+    try {
+        parsedData = json::parse(jsonResponse);
+    } catch (const json::parse_error& e) {
+        std::cerr << "JSON parse error: " << e.what() << std::endl;
+        return 1;
+    }
+
+    // Check for valid result data
     if (!parsedData.contains("result")) {
-        cerr << "No species data found in the API response." << endl;
+        std::cerr << "No species data found in the API response." << std::endl;
         return 1;
     }
 
+    // Create a MaxHeap to store species by count
     MaxHeap speciesHeap;
 
     for (const auto& species : parsedData["result"]) {
-        string name = species["scientific_name"].get<string>();
-        int count = species["taxonid"].get<int>();
+        std::string name = species.value("scientific_name", "Unknown");
+        int count = species.value("taxonid", 0); // Use taxonid as a placeholder count
 
         speciesHeap.insert({name, count});
-//        cout << "Inserted: " << name << " with count: " << count << endl;
     }
 
-    cout << "\nSpecies ordered by descending count:\n";
+    // Display species in descending order of count
+    std::cout << "\nSpecies ordered by descending count:\n";
     while (!speciesHeap.isEmpty()) {
         Species maxSpecies = speciesHeap.extractMax();
-        cout << maxSpecies.name << " with ID: " << maxSpecies.count << endl;
+        std::cout << maxSpecies.name << " with ID: " << maxSpecies.count << std::endl;
     }
 
     return 0;
