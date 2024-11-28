@@ -10,9 +10,9 @@ import Foundation
 //class SpeciesData: ObservableObject {
 //    @Published var species:
     func fetchData() async -> [Result] {
-        let apiKey = "9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"
+        let apiKey = ""
         if let url = URL(string: "https://apiv3.iucnredlist.org/api/v3/species/category/CR?token=" + apiKey) {
-            var request = URLRequest(url: url)
+            let request = URLRequest(url: url)
             do {
                 let (data, _) = try await URLSession.shared.data(for: request)
                 do {
