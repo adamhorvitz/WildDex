@@ -3,7 +3,7 @@
 
 int main() {
     // Replace "your_api_token_here" with the actual API token :)
-    const std::string apiToken = "your_api_token_here";
+    const std::string apiToken = "9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
     std::cout << "Starting Red List Scraper Test...\n";
 

@@ -20,4 +20,6 @@ std::string makeRequest(const std::string& url);
 // Callback function for cURL to handle API response data
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* output);
 
+std::string fetchCommonName(const std::string& scientificName, const std::string& apiToken);
+
 #endif // REDLIST_SCRAPER_H

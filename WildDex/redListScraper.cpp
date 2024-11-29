@@ -27,21 +27,18 @@ std::string makeRequest(const std::string& url) {
     return response;
 }
 
-// Function to fetch and process species data from the IUCN API
 int fetchRedListData(const std::string& apiToken) {
-    // Construct API URL with token
-    const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/species/category/CR?token=" + apiToken;
+    const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/country/getspecies/US?token=" + apiToken;
 
     std::cout << "Fetching data from IUCN Red List API..." << std::endl;
 
-    // Fetch data
     std::string jsonResponse = makeRequest(apiUrl);
     if (jsonResponse.empty()) {
         std::cerr << "Failed to fetch data from API." << std::endl;
         return 1;
     }
 
-    // Parse JSON response
+    // parse JSON response
     json parsedData;
     try {
         parsedData = json::parse(jsonResponse);
@@ -50,28 +47,65 @@ int fetchRedListData(const std::string& apiToken) {
         return 1;
     }
 
-    // Check for valid result data
+    // check for valid result data
     if (!parsedData.contains("result")) {
         std::cerr << "No species data found in the API response." << std::endl;
         return 1;
     }
 
-    // Create a MaxHeap to store species by count
     MaxHeap speciesHeap;
 
     for (const auto& species : parsedData["result"]) {
-        std::string name = species.value("scientific_name", "Unknown");
-        int count = species.value("taxonid", 0); // Use taxonid as a placeholder count
+        std::string scientificName = species.value("scientific_name", "Unknown");
+        std::string category = species.value("category", "");
 
-        speciesHeap.insert({name, count});
+        // critically endangered species only
+        if (category == "CR") {
+            // fetch the common name using a separate API request
+            std::string commonName = fetchCommonName(scientificName, apiToken);
+            int count = species.value("taxonid", 0); // Use taxonid as a placeholder count
+
+            speciesHeap.insert({commonName, count});
+        }
     }
 
-    // Display species in descending order of count
-    std::cout << "\nSpecies ordered by descending count:\n";
+    // display species in heap as descending order of count
+    std::cout << "\nCritically Endangered Species in the United States ordered by descending count:\n";
     while (!speciesHeap.isEmpty()) {
         Species maxSpecies = speciesHeap.extractMax();
         std::cout << maxSpecies.name << " with ID: " << maxSpecies.count << std::endl;
     }
 
     return 0;
+}
+
+// helper function to fetch common name for a species (DOES NOT WORK RIGHT NOW)
+std::string fetchCommonName(const std::string& scientificName, const std::string& apiToken) {
+    const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/species/common_names/" + scientificName + "?token=" + apiToken;
+
+    // fetch data
+    std::string jsonResponse = makeRequest(apiUrl);
+    if (jsonResponse.empty()) {
+        std::cerr << "Failed to fetch common name for: " << scientificName << std::endl;
+        return "Unknown";
+    }
+
+    json parsedData;
+    try {
+        parsedData = json::parse(jsonResponse);
+    } catch (const json::parse_error& e) {
+        std::cerr << "JSON parse error while fetching common name for: " << scientificName << ". Error: " << e.what() << std::endl;
+        return "Unknown";
+    }
+
+    // extract primary common name
+    if (parsedData.contains("result")) {
+        for (const auto& nameData : parsedData["result"]) {
+            if (nameData.value("primary", false)) { 
+                return nameData.value("name", "Unknown");
+            }
+        }
+    }
+
+    return "Unknown";
 }
