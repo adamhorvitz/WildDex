@@ -14,8 +14,8 @@ import SwiftUI
 import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-//    @Published var loadingState: LoadingState<CLPlacemark> = .idle
     private var locationContinuation: CheckedContinuation<CLPlacemark, Error>?
+    private var authorizationContinuation: CheckedContinuation<CLAuthorizationStatus, Never>?
     private let manager = CLLocationManager()
     
 //    enum LoadingState<CLPlacemark> {
@@ -38,18 +38,33 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 //        manager.startUpdatingLocation()
     }
     
+    func requestAuthorization() async -> CLAuthorizationStatus {
+        return await withCheckedContinuation { status in
+            self.authorizationContinuation = status
+            manager.requestWhenInUseAuthorization()
+        }
+    }
+    
     func requestLocation() async throws -> CLPlacemark {
-        guard CLLocationManager.locationServicesEnabled() && manager.authorizationStatus != .denied else {
+        guard CLLocationManager.locationServicesEnabled() else {
+            print("error, authorization not allowed!")
+            throw NSError(domain: "LocationServicesDisabled", code: 1, userInfo: nil)
+        }
+        
+        var authorizationStatus: CLAuthorizationStatus = manager.authorizationStatus
+        if authorizationStatus == .notDetermined {
+            authorizationStatus = await requestAuthorization()
+        }
+        
+        guard authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways else {
             print("error, authorization denied!")
             throw NSError(domain: "LocationServicesDisabled", code: 1, userInfo: nil)
         }
         
         return try await withCheckedThrowingContinuation { continuation in
             self.locationContinuation = continuation
-            manager.requestWhenInUseAuthorization()
             manager.requestLocation()
         }
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -78,32 +93,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationContinuation = nil
     }
     
-//    func getLocation() async {
-//        guard let location = location else {
-//            print("location not found yet")
-//            return
-//        }
-//        let geocoder = CLGeocoder()
-//        do {
-//            let placemarks = try await geocoder.reverseGeocodeLocation(location)
-//            if let placemark = placemarks.last {
-//                self.loadingState = .loaded(location: placemark)
-//                return
-//            }
-//        } catch {
-//            self.loadingState = .failed(error: error)
-//            print("error converting to placemark")
-//        }
-//    }
-    
-//    func loadData() {
-//        loadingState = .loading
-//        manager.requestWhenInUseAuthorization()
-//        if manager.authorizationStatus == .denied {
-//            loadingState = .failed(error: LocationError.accessDenied)
-//            print("denied!")
-//            return
-//        }
-//        manager.startUpdatingLocation()
-//    }
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if let continuation = authorizationContinuation {
+            continuation.resume(returning: manager.authorizationStatus)
+            authorizationContinuation = nil
+        }
+    }
 }

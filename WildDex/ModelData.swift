@@ -16,16 +16,13 @@ class SpeciesData: ObservableObject {
         species = Species(result: [])
     }
     
-    func getSpecies(for region: CLRegion) async {
-//            switch location.region?.identifier {
-//                case
-//            }
-        species = await fetchData(region: "europe")
+    func getSpecies(for country: String) async {
+        species = await fetchData(country: country)
     }
     
-    func fetchData(region: String) async -> Species {
+    func fetchData(country: String) async -> Species {
         let apiKey = "9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"
-        if let url = URL(string: "https://apiv3.iucnredlist.org/api/v3/species/region/\(region)/page/0?token=\(apiKey)") {
+        if let url = URL(string: "https://apiv3.iucnredlist.org/api/v3/country/getspecies/\(country)?token=\(apiKey)") {
             let request = URLRequest(url: url)
             do {
                 let (data, _) = try await URLSession.shared.data(for: request)
@@ -41,7 +38,7 @@ class SpeciesData: ObservableObject {
                     var species = try decoder.decode(Species.self, from: data)
                     species.result = Array(species.result[0...20])
                     for result in species.result {
-                        print(result.taxonid, result.scientific_name, result.main_common_name)
+                        print(result.taxonid, result.scientific_name)
                     }
                     return species
                 } catch {

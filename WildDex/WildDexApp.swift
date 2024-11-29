@@ -20,8 +20,9 @@ struct WildDexApp: App {
                 .task {
                     do {
                         let location = try await locationManager.requestLocation()
-                        if let region = location.region {
-                            await speciesData.getSpecies(for: region)
+                        if let country = location.isoCountryCode {
+                            print(country)
+                            await speciesData.getSpecies(for: country)
                             dataLoaded = true
                         }
                     } catch {
