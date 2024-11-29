@@ -43,17 +43,17 @@ void MinHeap::heapifyDown(int index) {
 }
 
 // Public method: Insert a species into the heap
-void MinHeap::insert(const Species& species) {
+void MinHeap::insert(const SpeciesNode& species) {
     heap.push_back(species);
     heapifyUp(heap.size() - 1);
 }
 
 // Public method: Extract the species with the minimum distance
-Species MinHeap::extractMin() {
+SpeciesNode MinHeap::extractMin() {
     if (heap.empty()) {
         throw runtime_error("Heap is empty");
     }
-    Species minSpecies = heap[0];
+    SpeciesNode minSpecies = heap[0];
     heap[0] = heap.back();
     heap.pop_back();
     if (!heap.empty()) {
@@ -86,10 +86,10 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
 }
 
 // Function to create a MinHeap of endangered species sorted by distance
-MinHeap createEndangeredSpeciesHeap(const vector<Species>& species, double userLat, double userLon) {
+MinHeap createEndangeredSpeciesHeap(const vector<SpeciesNode>& species, double userLat, double userLon) {
     MinHeap heap;
     for (const auto& s : species) {
-        Species speciesWithDistance = s;
+        SpeciesNode speciesWithDistance = s;
         speciesWithDistance.distance = calculateDistance(userLat, userLon, s.latitude, s.longitude);
         heap.insert(speciesWithDistance);
     }

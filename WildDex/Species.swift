@@ -21,3 +21,8 @@ struct Result: Codable {
     var category: String
 //    var main_common_name: String?
 }
+
+struct SpeciesWithID: Identifiable {
+    var id: Int
+    var name: String
+}

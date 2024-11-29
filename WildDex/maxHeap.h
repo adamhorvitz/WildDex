@@ -8,11 +8,11 @@
 
 using namespace std;
 
-struct Species { // Species struct (may not need this?)
+struct SpeciesNode { // Species struct (may not need this?)
     string name;
     int count;
 
-    bool operator<(const Species& other) const {
+    bool operator<(const SpeciesNode& other) const {
         return count < other.count;
     }
 };
@@ -20,14 +20,14 @@ struct Species { // Species struct (may not need this?)
 // Max Heap class
 class MaxHeap {
 private:
-    vector<Species> heap; // Vector of Species
+    vector<SpeciesNode> heap; // Vector of Species
 
     void heapifyUp(int index); // Heapify up function
     void heapifyDown(int index); // Heapify down function
 
 public:
-    void insert(const Species& species); // Insert a Species into the heap
-    Species extractMax(); // Extract the Species with the highest count
+    void insert(const SpeciesNode& species); // Insert a Species into the heap
+    SpeciesNode extractMax(); // Extract the Species with the highest count
     bool isEmpty() const; // Check if the heap is empty
 };
 

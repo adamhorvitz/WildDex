@@ -38,17 +38,17 @@ void MaxHeap::heapifyDown(int index) {
 }
 
 // Public method: Insert a Species into the heap
-void MaxHeap::insert(const Species& species) {
+void MaxHeap::insert(const SpeciesNode& species) {
     heap.push_back(species);
     heapifyUp(heap.size() - 1);
 }
 
 // Public method: Extract the Species with the highest count
-Species MaxHeap::extractMax() {
+SpeciesNode MaxHeap::extractMax() {
     if (heap.empty()) {
         throw runtime_error("Heap is empty");
     }
-    Species maxSpecies = heap[0];
+    SpeciesNode maxSpecies = heap[0];
     heap[0] = heap.back();
     heap.pop_back();
     if (!heap.empty()) {

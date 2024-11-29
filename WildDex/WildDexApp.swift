@@ -23,6 +23,7 @@ struct WildDexApp: App {
                         if let country = location.isoCountryCode {
                             print(country)
                             await speciesData.getSpecies(for: country)
+                            await speciesData.getTopOfMaxHeap()
                             dataLoaded = true
                         }
                     } catch {

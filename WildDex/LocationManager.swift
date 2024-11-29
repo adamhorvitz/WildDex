@@ -18,10 +18,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var authorizationContinuation: CheckedContinuation<CLAuthorizationStatus, Never>?
     private let manager = CLLocationManager()
     
-//    enum LoadingState<CLPlacemark> {
-//        case idle, loading, failed(error: Error), loaded(location: CLPlacemark)
-//    }
-    
     enum LocationError: Error {
         case accessDenied, unknown
     }
