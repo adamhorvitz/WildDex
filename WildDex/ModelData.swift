@@ -5,13 +5,27 @@
 //  Created by Lexline Johnson on 11/27/24.
 //
 
-import Foundation
+import SwiftUI
+import CoreLocation
 
-//class SpeciesData: ObservableObject {
-//    @Published var species:
-    func fetchData() async -> [Result] {
-        let apiKey = ""
-        if let url = URL(string: "https://apiv3.iucnredlist.org/api/v3/species/category/CR?token=" + apiKey) {
+@MainActor
+class SpeciesData: ObservableObject {
+    @Published var species: Species
+    
+    init() {
+        species = Species(result: [])
+    }
+    
+    func getSpecies(for region: CLRegion) async {
+//            switch location.region?.identifier {
+//                case
+//            }
+        species = await fetchData(region: "europe")
+    }
+    
+    func fetchData(region: String) async -> Species {
+        let apiKey = "9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"
+        if let url = URL(string: "https://apiv3.iucnredlist.org/api/v3/species/region/\(region)/page/0?token=\(apiKey)") {
             let request = URLRequest(url: url)
             do {
                 let (data, _) = try await URLSession.shared.data(for: request)
@@ -24,19 +38,19 @@ import Foundation
 //                     if let result = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
 //                         print("JSON Keys:", result["result"])
 //                     }
-                    let species = try decoder.decode(Species.self, from: data)
+                    var species = try decoder.decode(Species.self, from: data)
+                    species.result = Array(species.result[0...20])
                     for result in species.result {
-                        print(result.rank, result.scientific_name, result.subpopulation, result.subspecies, result.taxonid)
+                        print(result.taxonid, result.scientific_name, result.main_common_name)
                     }
-                    return species.result
+                    return species
                 } catch {
                     print("decode error:", error)
                 }
             } catch {
                 print("load error:", error)
-                return []
             }
         }
-        return []
+        return Species(result: [])
     }
-//}
+}

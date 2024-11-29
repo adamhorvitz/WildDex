@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ContentView: View {
+    @Binding var dataLoaded: Bool
     var body: some View {
         TabView {
-            HomeView()
+            HomeView(dataLoaded: $dataLoaded)
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
@@ -31,5 +33,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(dataLoaded: .constant(false))
 }

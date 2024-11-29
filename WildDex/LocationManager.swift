@@ -10,16 +10,17 @@
 // on to something, so I'm borrowing some of my
 // code from it.
 
-import Foundation
+import SwiftUI
 import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var loadingState: LoadingState<CLPlacemark> = .idle
+//    @Published var loadingState: LoadingState<CLPlacemark> = .idle
+    private var locationContinuation: CheckedContinuation<CLPlacemark, Error>?
     private let manager = CLLocationManager()
     
-    enum LoadingState<CLPlacemark> {
-        case idle, loading, failed(Error), loaded(CLPlacemark)
-    }
+//    enum LoadingState<CLPlacemark> {
+//        case idle, loading, failed(error: Error), loaded(location: CLPlacemark)
+//    }
     
     enum LocationError: Error {
         case accessDenied, unknown
@@ -27,41 +28,82 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     override init() {
         super.init()
-        loadingState = .loading
         manager.delegate = self
         manager.distanceFilter = 10000
-        manager.requestWhenInUseAuthorization()
-        if manager.authorizationStatus == .denied {
-            loadingState = .failed(LocationError.accessDenied)
-            return
+//        manager.requestWhenInUseAuthorization()
+//        if manager.authorizationStatus == .denied {
+//            print("error, authorization denied!")
+//            return
+//        }
+//        manager.startUpdatingLocation()
+    }
+    
+    func requestLocation() async throws -> CLPlacemark {
+        guard CLLocationManager.locationServicesEnabled() && manager.authorizationStatus != .denied else {
+            print("error, authorization denied!")
+            throw NSError(domain: "LocationServicesDisabled", code: 1, userInfo: nil)
         }
-        manager.startUpdatingLocation()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            self.locationContinuation = continuation
+            manager.requestWhenInUseAuthorization()
+            manager.requestLocation()
+        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        loadingState = .loading
+        guard let location = locations.last else { return }
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(locations.last ?? .init(latitude: 37.3333, longitude: -122.0068)) { placemarks, error in
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
             guard let placemarks = placemarks else {
-                self.loadingState = .failed(error!)
+                self.locationContinuation?.resume(throwing: error ?? LocationError.unknown)
+                self.locationContinuation = nil
                 return
             }
             if let placemark = placemarks.last {
-                self.loadingState = .loaded(placemark)
+                self.locationContinuation?.resume(returning: placemark)
+                self.locationContinuation = nil
                 return
             }
-            self.loadingState = .failed(error!)
+            self.locationContinuation?.resume(throwing: error ?? LocationError.unknown)
+            self.locationContinuation = nil
+            return
         }
     }
     
-    func loadData() {
-        loadingState = .loading
-        manager.requestWhenInUseAuthorization()
-        if manager.authorizationStatus == .denied {
-            loadingState = .failed(LocationError.accessDenied)
-            print("denied!")
-            return
-        }
-        manager.startUpdatingLocation()
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
+        print("error: ", error)
+        locationContinuation?.resume(throwing: error)
+        locationContinuation = nil
     }
+    
+//    func getLocation() async {
+//        guard let location = location else {
+//            print("location not found yet")
+//            return
+//        }
+//        let geocoder = CLGeocoder()
+//        do {
+//            let placemarks = try await geocoder.reverseGeocodeLocation(location)
+//            if let placemark = placemarks.last {
+//                self.loadingState = .loaded(location: placemark)
+//                return
+//            }
+//        } catch {
+//            self.loadingState = .failed(error: error)
+//            print("error converting to placemark")
+//        }
+//    }
+    
+//    func loadData() {
+//        loadingState = .loading
+//        manager.requestWhenInUseAuthorization()
+//        if manager.authorizationStatus == .denied {
+//            loadingState = .failed(error: LocationError.accessDenied)
+//            print("denied!")
+//            return
+//        }
+//        manager.startUpdatingLocation()
+//    }
 }

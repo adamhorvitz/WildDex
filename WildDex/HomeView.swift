@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct HomeView: View {
-   var body: some View {
+    @EnvironmentObject var speciesData: SpeciesData
+    @Binding var dataLoaded: Bool
+    var body: some View {
        NavigationStack {
            ScrollView {
-               VStack(alignment: .leading) {
-                   Text("Find endangered animals near you")
-                   ForEach(1..<5) { num in
-                       GroupBox {
-                           Text(String(num))
-                               .frame(maxWidth: .infinity)
+               if dataLoaded {
+                   VStack(alignment: .leading) {
+                       Text("Find endangered animals near you")
+                       ForEach(speciesData.species.result, id: \.taxonid) { animal in
+                           GroupBox {
+                               Text(animal.scientific_name)
+                                   .frame(maxWidth: .infinity)
+                           }
                        }
                    }
+                   .padding()
+               } else {
+                   Text("Counting animals...")
                }
-               .padding()
            }
            .toolbar {
                Button(action: {}) {
@@ -28,9 +34,6 @@ struct HomeView: View {
                }
            }
            .navigationTitle("Explore")
-       }
-       .task {
-           var itemData = await fetchData()
        }
    }
     
@@ -56,5 +59,5 @@ struct HomeView: View {
 }
 
 #Preview {
-   HomeView()
+    HomeView(dataLoaded: .constant(false))
 }
