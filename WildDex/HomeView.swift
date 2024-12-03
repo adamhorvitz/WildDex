@@ -16,11 +16,11 @@ struct HomeView: View {
                if dataLoaded {
                    VStack(alignment: .leading) {
                        Text("Find endangered animals near you")
-                       ForEach(speciesData.nearbySpecies) { animal in
+                       ForEach(speciesData.species) { species in
                            GroupBox {
                                HStack {
-                                   Text(animal.name)
-                                   Text(String(animal.id))
+                                   Text(species.name)
+                                   Text(String(species.id))
                                }
                                .frame(maxWidth: .infinity)
                            }

@@ -9,7 +9,7 @@
 using namespace std;
 
 struct SpeciesNode { // Species struct (may not need this?)
-    string name;
+    string id;
     int count;
 
     bool operator<(const SpeciesNode& other) const {

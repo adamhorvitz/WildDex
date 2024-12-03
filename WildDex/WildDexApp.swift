@@ -22,7 +22,7 @@ struct WildDexApp: App {
                         let location = try await locationManager.requestLocation()
                         if let country = location.isoCountryCode {
                             print(country)
-                            await speciesData.getSpecies(for: country)
+                            await speciesData.loadSpecies(for: country)
                             await speciesData.getTopOfMaxHeap()
                             dataLoaded = true
                         }
