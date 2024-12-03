@@ -1,4 +1,4 @@
-#include "MaxHeap.h"
+#include "maxHeap.h"
 
 // Private method: Heapify up
 void MaxHeap::heapifyUp(int index) {

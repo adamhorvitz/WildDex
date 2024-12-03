@@ -38,3 +38,11 @@
 2	833	1732850755246001983	CMakeFiles/WildDex.dir/WildDex/main.cpp.o	6e2679805a86dcca
 3	1138	1732850755550215168	CMakeFiles/WildDex.dir/WildDex/redListScraper.cpp.o	623c76ae0d51d476
 1138	1272	1732850755688419211	WildDex	352a96df60d9d56d
+4	670	1733267913133331340	CMakeFiles/WildDex.dir/WildDex/maxHeap.cpp.o	472af391fc46db1d
+5	702	1733267913136443058	CMakeFiles/WildDex.dir/WildDex/minHeap.cpp.o	96df7a5d908da096
+4	956	1733267913405692953	CMakeFiles/WildDex.dir/WildDex/main.cpp.o	6e2679805a86dcca
+3	367	1733267932760601162	CMakeFiles/WildDex.dir/WildDex/maxHeap.cpp.o	472af391fc46db1d
+3	978	1733268079115682977	CMakeFiles/WildDex.dir/WildDex/redListScraper.cpp.o	623c76ae0d51d476
+981	1180	1733268079320469470	WildDex	352a96df60d9d56d
+2	1019	1733268127193149545	CMakeFiles/WildDex.dir/WildDex/redListScraper.cpp.o	623c76ae0d51d476
+1019	1071	1733268127249523038	WildDex	352a96df60d9d56d

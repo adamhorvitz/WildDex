@@ -8,7 +8,7 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* out
 }
 
 // Function to make HTTP GET requests using cURL
-std::string makeRequest(const std::string& url) {/
+std::string makeRequest(const std::string& url) {
     CURL* curl;
     CURLcode res;
     std::string response;
@@ -62,10 +62,10 @@ int fetchRedListData(const std::string& apiToken) {
         // critically endangered species only
         if (category == "CR") {
             // fetch the common name using a separate API request
-            std::string commonName = fetchCommonName(scientificName, apiToken);
+//            std::string commonName = fetchCommonName(scientificName, apiToken);
             int count = species.value("taxonid", 0); // Use taxonid as a placeholder count
 
-            speciesHeap.insert({commonName, count});
+            speciesHeap.insert({scientificName, count});
         }
     }
 
@@ -73,7 +73,7 @@ int fetchRedListData(const std::string& apiToken) {
     std::cout << "\nCritically Endangered Species in the United States ordered by descending count:\n";
     while (!speciesHeap.isEmpty()) {
         SpeciesNode maxSpecies = speciesHeap.extractMax();
-        std::cout << maxSpecies.name << " with ID: " << maxSpecies.count << std::endl;
+        std::cout << maxSpecies.id << " with ID: " << maxSpecies.count << std::endl;
     }
 
     return 0;
