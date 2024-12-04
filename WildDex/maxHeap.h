@@ -9,8 +9,9 @@
 using namespace std;
 
 struct SpeciesNode { // Species struct (may not need this?)
-    string id;
+    string id; //index is id
     int count;
+    string name;
 
     bool operator<(const SpeciesNode& other) const {
         return count < other.count;

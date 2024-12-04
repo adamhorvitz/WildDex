@@ -9,7 +9,7 @@
 void MinHeap::heapifyUp(int index) {
     while (index > 0) {
         int parentIndex = (index - 1) / 2;
-        if (heap[parentIndex].distance > heap[index].distance) {
+        if (heap[parentIndex].name > heap[index].name) {
             swap(heap[parentIndex], heap[index]);
             index = parentIndex;
         } else {
@@ -26,10 +26,10 @@ void MinHeap::heapifyDown(int index) {
         int leftChild = 2 * index + 1;
         int rightChild = 2 * index + 2;
 
-        if (leftChild < size && heap[leftChild].distance < heap[smallest].distance) {
+        if (leftChild < size && heap[leftChild].name < heap[smallest].name) {
             smallest = leftChild;
         }
-        if (rightChild < size && heap[rightChild].distance < heap[smallest].distance) {
+        if (rightChild < size && heap[rightChild].name < heap[smallest].name) {
             smallest = rightChild;
         }
 
@@ -66,6 +66,7 @@ SpeciesNode MinHeap::extractMin() {
 bool MinHeap::isEmpty() const {
     return heap.empty();
 }
+/*
 
 // Function to calculate distance between two geographical points
 double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
@@ -95,3 +96,4 @@ MinHeap createEndangeredSpeciesHeap(const vector<SpeciesNode>& species, double u
     }
     return heap;
 }
+*/

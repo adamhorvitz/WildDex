@@ -1,10 +1,12 @@
 #include "maxHeap.h"
 
+//TODO sort by alpabetical
+
 // Private method: Heapify up
-void MaxHeap::heapifyUp(int index) {
+void MaxHeap::heapifyUp(int index) { //string name
     while (index > 0) {
         int parentIndex = (index - 1) / 2;
-        if (heap[parentIndex].count < heap[index].count) { // Compare priorities
+        if (heap[parentIndex].name > heap[index].name) { // Compare priorities
             swap(heap[parentIndex], heap[index]);
             index = parentIndex;
         } else {
@@ -12,7 +14,7 @@ void MaxHeap::heapifyUp(int index) {
         }
     }
 }
-
+//change index to be a number made up based on alphabetical priority
 // Private method: Heapify down
 void MaxHeap::heapifyDown(int index) {
     int size = heap.size();
@@ -21,10 +23,10 @@ void MaxHeap::heapifyDown(int index) {
         int leftChild = 2 * index + 1;
         int rightChild = 2 * index + 2;
 
-        if (leftChild < size && heap[leftChild].count > heap[largest].count) {
+        if (leftChild < size && heap[leftChild].name < heap[largest].name) {
             largest = leftChild;
         }
-        if (rightChild < size && heap[rightChild].count > heap[largest].count) {
+        if (rightChild < size && heap[rightChild].name < heap[largest].name) {
             largest = rightChild;
         }
 

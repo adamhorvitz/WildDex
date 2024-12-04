@@ -53,7 +53,7 @@ int fetchRedListData(const std::string& apiToken) {
         return 1;
     }
 
-    MaxHeap speciesHeap;
+    MinHeap speciesHeap;
 
     for (const auto& species : parsedData["result"]) {
         std::string scientificName = species.value("scientific_name", "Unknown");
@@ -72,12 +72,16 @@ int fetchRedListData(const std::string& apiToken) {
     // display species in heap as descending order of count
     std::cout << "\nCritically Endangered Species in the United States ordered by descending count:\n";
     while (!speciesHeap.isEmpty()) {
-        SpeciesNode maxSpecies = speciesHeap.extractMax();
-        std::cout << maxSpecies.id << " with ID: " << maxSpecies.count << std::endl;
+        SpeciesNode minSpecies = speciesHeap.extractMin();
+        std::cout << minSpecies.name << " with ID: " << minSpecies.count << std::endl;
     }
 
     return 0;
 }
+
+//_____________________________
+//TODO create quick sort for alpabetical species names
+//_____________________________
 
 // helper function to fetch common name for a species (DOES NOT WORK RIGHT NOW)
 std::string fetchCommonName(const std::string& scientificName, const std::string& apiToken) {

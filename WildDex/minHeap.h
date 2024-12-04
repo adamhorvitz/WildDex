@@ -14,6 +14,9 @@ struct SpeciesNode {
     double latitude;
     double longitude;
     double distance;
+    int id;
+
+    int count;
 };
 
 // Min Heap class for Species
