@@ -28,7 +28,7 @@ std::string makeRequest(const std::string& url) {
 }
 
 //fetching using heap ______________________________________
-/*int fetchRedListData(const std::string& apiToken) {
+int fetchHeapSort(const std::string& apiToken) {
     const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/country/getspecies/US?token=" + apiToken;
 
     std::cout << "Fetching data from IUCN Red List API..." << std::endl;
@@ -71,14 +71,14 @@ std::string makeRequest(const std::string& url) {
     }
 
     // display species in heap as descending order of count
-    std::cout << "\nCritically Endangered Species in the United States ordered by descending count:\n";
+    std::cout << "\nHEAP SORT: Critically Endangered Species in the United States ordered by descending count:\n";
     while (!speciesHeap.isEmpty()) {
         SpeciesNode minSpecies = speciesHeap.extractMin();
         std::cout << minSpecies.name << " with ID: " << minSpecies.count << std::endl;
     }
 
     return 0;
-}*/
+}
 //_______________________________________
 
 //reference: https://www.geeksforgeeks.org/quick-sort-algorithm/
@@ -109,7 +109,7 @@ void quickSort(vector<string>& names, vector<int>& ids, int low, int high) {
 }
 //_____________________________
 //FETCH USING QUICKSORT+++++++++++++++++++++
-int fetchRedListData(const std::string& apiToken) {
+int fetchQuickSort(const std::string& apiToken) {
     const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/country/getspecies/US?token=" + apiToken;
 
     std::cout << "Fetching data from IUCN Red List API..." << std::endl;
@@ -154,7 +154,7 @@ int fetchRedListData(const std::string& apiToken) {
     quickSort(speciesNames, speciesIDs, 0, speciesNames.size() - 1);
 
     // display species in vector as descending order of count
-    std::cout << "\nCritically Endangered Species in the United States ordered by descending count:\n";
+    std::cout << "\nQUICK SORT: Critically Endangered Species in the United States ordered by descending count:\n";
     for (size_t i = 0; i < speciesNames.size(); i++) {
         std::cout << speciesNames[i] << " with ID: " << speciesIDs[i] << std::endl;
     }
