@@ -19,7 +19,6 @@ struct SpeciesResult: Codable {
     var rank: String?
     var subpopulation: String?
     var category: String
-//    var main_common_name: String?
 }
 
 
@@ -48,6 +47,7 @@ struct SpeciesDetail: Identifiable {
     var redListCategory: String
     var populationTrend: String
     var description: String?
+//    var favorite: Bool
     
     init(id: Int, name: String?, scientificName: String, redListCategory: String, populationTrend: String, description: String? = nil) {
         self.id = id
@@ -56,5 +56,6 @@ struct SpeciesDetail: Identifiable {
         self.redListCategory = redListCategory
         self.populationTrend = populationTrend
         self.description = description
+//        self.favorite = false
     }
 }

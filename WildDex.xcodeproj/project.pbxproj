@@ -19,6 +19,7 @@
 		C98F42C72CF8341300D546C5 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98F42C62CF8341300D546C5 /* Species.swift */; };
 		C98F42C92CF874A100D546C5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98F42C82CF874A100D546C5 /* LocationManager.swift */; };
 		C996E4062CF7E67500C47795 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C996E4052CF7E67500C47795 /* libz.tbd */; };
+		C9F2A18B2CFFD88700CEA39A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F2A18A2CFFD88700CEA39A /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		C98F42C82CF874A100D546C5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C996E4052CF7E67500C47795 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C996E4082CF80A3A00C47795 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9F2A18A2CFFD88700CEA39A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				C938E9E92CF3DD5000B33F31 /* ContentView.swift */,
 				C98F42C82CF874A100D546C5 /* LocationManager.swift */,
 				C970A0472CF3F0FB005E81A0 /* HomeView.swift */,
+				C9F2A18A2CFFD88700CEA39A /* SettingsView.swift */,
 				C98F42C42CF8300200D546C5 /* ModelData.swift */,
 				C98F42C62CF8341300D546C5 /* Species.swift */,
 				C938E9EB2CF3DD5100B33F31 /* Assets.xcassets */,
@@ -184,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C98DB5152CF988C200A34309 /* maxHeap.cpp in Sources */,
+				C9F2A18B2CFFD88700CEA39A /* SettingsView.swift in Sources */,
 				C938E9EA2CF3DD5000B33F31 /* ContentView.swift in Sources */,
 				C98F42C52CF8300200D546C5 /* ModelData.swift in Sources */,
 				C98F42C92CF874A100D546C5 /* LocationManager.swift in Sources */,

@@ -9,29 +9,44 @@ import SwiftUI
 import CoreLocation
 
 struct ContentView: View {
+    @EnvironmentObject var speciesData: SpeciesData
+    @State var selectedTab: Tab = .home
     @Binding var dataLoaded: Bool
+    @Binding var useCurrentLocation: Bool
+    @Binding var country: String
+    
+    enum Tab {
+        case home, settings
+    }
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             HomeView(dataLoaded: $dataLoaded)
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
-            Text("map view")
+                .tag(Tab.home)
+            SettingsView(useCurrentLocation: $useCurrentLocation, country: $country)
                 .tabItem {
-                    Label("Map", systemImage: "map.fill")
+                    Label("Settings", systemImage: "gear")
                 }
-            Text("favorites view")
-                .tabItem {
-                    Label("Favorites", systemImage: "star.fill")
+                .tag(Tab.settings)
+        }
+        .task(id: selectedTab) {
+            if selectedTab == .home {
+                if let loadedCountry = speciesData.country {
+                    print("loadedCountry:", loadedCountry)
+                    print("current country:", country)
+                    if country != loadedCountry {
+                        await speciesData.loadSpecies(for: country)
+                        await speciesData.getTopOfMaxHeap()
+                    }
                 }
-            Text("community view")
-                .tabItem {
-                    Label("Community", systemImage: "person.3.fill")
-                }
+            }
         }
     }
 }
 
-#Preview {
-    ContentView(dataLoaded: .constant(false))
-}
+//#Preview {
+//    ContentView(dataLoaded: .constant(false))
+//}

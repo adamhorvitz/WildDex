@@ -12,6 +12,7 @@ import CoreLocation
 class SpeciesData: ObservableObject {
     @Published var species: [SpeciesDetail]
     var speciesForCountry: Species?
+    var country: String?
     
     init() {
         species = []
@@ -20,6 +21,7 @@ class SpeciesData: ObservableObject {
     
     func getTopOfMaxHeap(num: Int = 10) async {
         guard let species = speciesForCountry else { return }
+        self.species = []
         var speciesHeap = MaxHeap()
         for animal in species.result {
             speciesHeap.insert(SpeciesNode(id: std.string(String(animal.taxonid)), count: Int32(animal.taxonid)))
@@ -69,6 +71,7 @@ class SpeciesData: ObservableObject {
     func loadSpecies(for country: String) async {
         do {
             speciesForCountry = try await fetchData(country: country)
+            self.country = country
         } catch {
             print("Error: species does not exist")
         }

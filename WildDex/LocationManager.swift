@@ -13,7 +13,10 @@
 import SwiftUI
 import CoreLocation
 
+@MainActor
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var location: CLPlacemark?
+    
     private var locationContinuation: CheckedContinuation<CLPlacemark, Error>?
     private var authorizationContinuation: CheckedContinuation<CLAuthorizationStatus, Never>?
     private let manager = CLLocationManager()
@@ -26,12 +29,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         manager.distanceFilter = 10000
-//        manager.requestWhenInUseAuthorization()
-//        if manager.authorizationStatus == .denied {
-//            print("error, authorization denied!")
-//            return
-//        }
-//        manager.startUpdatingLocation()
+    }
+    
+    func requestLocation() async throws {
+        self.location = try await requestPlacemark()
     }
     
     func requestAuthorization() async -> CLAuthorizationStatus {
@@ -41,12 +42,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    func requestLocation() async throws -> CLPlacemark {
-        guard CLLocationManager.locationServicesEnabled() else {
-            print("error, authorization not allowed!")
-            throw NSError(domain: "LocationServicesDisabled", code: 1, userInfo: nil)
-        }
-        
+    func requestPlacemark() async throws -> CLPlacemark {
         var authorizationStatus: CLAuthorizationStatus = manager.authorizationStatus
         if authorizationStatus == .notDetermined {
             authorizationStatus = await requestAuthorization()

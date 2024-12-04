@@ -20,7 +20,6 @@ struct HomeView: View {
                            GroupBox {
                                HStack {
                                    Text(species.name)
-                                   Text(String(species.id))
                                }
                                .frame(maxWidth: .infinity)
                            }
@@ -31,34 +30,9 @@ struct HomeView: View {
                    Text("Counting animals...")
                }
            }
-           .toolbar {
-               Button(action: {}) {
-                   Label("profile", systemImage: "person.crop.circle")
-               }
-           }
            .navigationTitle("Explore")
        }
    }
-    
-   
-//    func getHeap() {
-//        var speciesArrayPtr = getSpeciesSorted()
-//
-//        while speciesArrayPtr != nil {
-//            guard let newSpecies = speciesArrayPtr?.pointee?.pointee else { return }
-//            species.append(newSpecies)
-//            speciesArrayPtr = speciesArrayPtr?.advanced(by: 1)
-//        }
-//
-//        for animal in species {
-//            print(animal.name, " with ID ", animal.count)
-//        }
-//
-////        (0 ..< 4).forEach { _ in
-////            species.append(<#T##newElement: Species##Species#>)
-//////            print(ptr?.advanced(by: $0).pointee)
-////        }
-//    }
 }
 
 #Preview {
