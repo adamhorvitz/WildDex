@@ -12,7 +12,9 @@ add_executable(WildDex
         WildDex/redListScraper.cpp
         WildDex/maxHeap.h
         WildDex/minHeap.h
-        WildDex/redListScraper.h)
+        WildDex/redListScraper.h
+        WildDex/quicksort.h
+        WildDex/quicksort.cpp)
 
 find_package(CURL REQUIRED)
 target_include_directories(WildDex PRIVATE ${CURL_INCLUDE_DIRS})

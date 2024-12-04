@@ -1,4 +1,5 @@
 #include "redListScraper.h"
+#include "quicksort.h"
 
 // Callback function for cURL to handle response data
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* output) {
@@ -79,35 +80,6 @@ int fetchHeapSort(const std::string& apiToken) {
 
     return 0;
 }
-//_______________________________________
-
-//reference: https://www.geeksforgeeks.org/quick-sort-algorithm/
-int pivotLogic(vector<string>& names, vector<int>& ids, int low, int high) {
-    //preset pivot point
-    string pivot = names[high];
-    int index = low - 1;
-
-    for (int i = low; i <= high - 1; i++) {
-        if(names[i] < pivot) {
-            index++;
-            swap(names[index], names[i]);
-            swap(ids[index], ids[i]);
-        }
-    }
-    swap(names[index + 1], names[high]);
-    swap(ids[index + 1], ids[high]);
-    return index + 1;
-}
-void quickSort(vector<string>& names, vector<int>& ids, int low, int high) {
-    if (low < high) {
-        int separation = pivotLogic(names, ids, low, high);
-
-        //recursion for element calls
-        quickSort(names, ids, low, separation - 1);
-        quickSort(names, ids, separation + 1, high);
-    }
-}
-//_____________________________
 //FETCH USING QUICKSORT+++++++++++++++++++++
 int fetchQuickSort(const std::string& apiToken) {
     const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/country/getspecies/US?token=" + apiToken;
@@ -162,7 +134,6 @@ int fetchQuickSort(const std::string& apiToken) {
     return 0;
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 // helper function to fetch common name for a species (DOES NOT WORK RIGHT NOW)
 std::string fetchCommonName(const std::string& scientificName, const std::string& apiToken) {
     const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/species/common_names/" + scientificName + "?token=" + apiToken;
