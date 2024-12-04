@@ -27,7 +27,8 @@ std::string makeRequest(const std::string& url) {
     return response;
 }
 
-int fetchRedListData(const std::string& apiToken) {
+//fetching using heap ______________________________________
+/*int fetchRedListData(const std::string& apiToken) {
     const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/country/getspecies/US?token=" + apiToken;
 
     std::cout << "Fetching data from IUCN Red List API..." << std::endl;
@@ -77,14 +78,13 @@ int fetchRedListData(const std::string& apiToken) {
     }
 
     return 0;
-}
+}*/
+//_______________________________________
 
-//_____________________________
-//TODO create quick sort for alpabetical species names
 //reference: https://www.geeksforgeeks.org/quick-sort-algorithm/
-int pivotLogic(vector<int>& nameArray, int low, int high) {
+int pivotLogic(vector<string>& nameArray, int low, int high) {
     //preset pivot point
-    int pivot = nameArray[high];
+    string pivot = nameArray[high];
     int index = low - 1;
 
     for (int i = low; i <= high - 1; i++) {
@@ -97,7 +97,7 @@ int pivotLogic(vector<int>& nameArray, int low, int high) {
     return index + 1;
 }
 
-void quickSort(vector<int>& nameArray, int low, int high) {
+void quickSort(vector<string>& nameArray, int low, int high) {
     if (low < high) {
         int separation = pivotLogic(nameArray, low, high);
 
@@ -107,6 +107,60 @@ void quickSort(vector<int>& nameArray, int low, int high) {
     }
 }
 //_____________________________
+//FETCH USING QUICKSORT+++++++++++++++++++++
+int fetchRedListData(const std::string& apiToken) {
+    const std::string apiUrl = "https://apiv3.iucnredlist.org/api/v3/country/getspecies/US?token=" + apiToken;
+
+    std::cout << "Fetching data from IUCN Red List API..." << std::endl;
+
+    std::string jsonResponse = makeRequest(apiUrl);
+    if (jsonResponse.empty()) {
+        std::cerr << "Failed to fetch data from API." << std::endl;
+        return 1;
+    }
+
+    // parse JSON response
+    json parsedData;
+    try {
+        parsedData = json::parse(jsonResponse);
+    } catch (const json::parse_error& e) {
+        std::cerr << "JSON parse error: " << e.what() << std::endl;
+        return 1;
+    }
+
+    // check for valid result data
+    if (!parsedData.contains("result")) {
+        std::cerr << "No species data found in the API response." << std::endl;
+        return 1;
+    }
+
+    vector<string> speciesNames;
+
+    //collect species names
+    for (const auto& species : parsedData["result"]) {
+        std::string scientificName = species.value("scientific_name", "Unknown");
+        std::string category = species.value("category", "");
+
+        // critically endangered species only
+        if (category == "CR") {
+            // fetch the common name using a separate API request
+//            std::string commonName = fetchCommonName(scientificName, apiToken);
+            speciesNames.push_back(scientificName);
+        }
+    }
+    //sort species
+    quickSort(speciesNames, 0, speciesNames.size() - 1);
+
+    // display species in vector as descending order of count
+    std::cout << "\nCritically Endangered Species in the United States ordered by descending count:\n";
+    for (const auto& name : speciesNames) {
+        //std::cout << name << " with ID: " << name.count << std::endl;
+        std::cout << name << std::endl;
+    }
+
+    return 0;
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // helper function to fetch common name for a species (DOES NOT WORK RIGHT NOW)
 std::string fetchCommonName(const std::string& scientificName, const std::string& apiToken) {
