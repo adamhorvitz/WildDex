@@ -3,6 +3,7 @@
  https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/
  */
 
+/*
 #include "minHeap.h"
 
 // Private method: Heapify up
@@ -66,6 +67,7 @@ SpeciesNode MinHeap::extractMin() {
 bool MinHeap::isEmpty() const {
     return heap.empty();
 }
+*/
 /*
 
 // Function to calculate distance between two geographical points
@@ -97,3 +99,4 @@ MinHeap createEndangeredSpeciesHeap(const vector<SpeciesNode>& species, double u
     return heap;
 }
 */
+
