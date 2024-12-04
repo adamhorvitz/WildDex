@@ -28,8 +28,8 @@ struct SpeciesInformation: Codable {
 
 struct SpeciesInformationResult: Codable {
     var taxonid: Int
-    var main_common_name: String?
     var scientific_name: String
+    var main_common_name: String?
     var category: String
     var population_trend: String
 }

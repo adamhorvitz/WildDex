@@ -14,11 +14,12 @@
 		C93E47202CF7DAF300B5EBC7 /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93E471F2CF7DAF300B5EBC7 /* curl.xcframework */; };
 		C970A0482CF3F0FB005E81A0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C970A0472CF3F0FB005E81A0 /* HomeView.swift */; };
 		C98DB5122CF9849300A34309 /* libswiftCore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C98DB5112CF9849300A34309 /* libswiftCore.tbd */; };
-		C98DB5152CF988C200A34309 /* maxHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C98DB5142CF988C200A34309 /* maxHeap.cpp */; };
 		C98F42C52CF8300200D546C5 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98F42C42CF8300200D546C5 /* ModelData.swift */; };
 		C98F42C72CF8341300D546C5 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98F42C62CF8341300D546C5 /* Species.swift */; };
 		C98F42C92CF874A100D546C5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98F42C82CF874A100D546C5 /* LocationManager.swift */; };
 		C996E4062CF7E67500C47795 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C996E4052CF7E67500C47795 /* libz.tbd */; };
+		C997051A2D00E96800AEA867 /* quicksort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99705192D00E96800AEA867 /* quicksort.cpp */; };
+		C997051D2D00E98100AEA867 /* minHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C997051C2D00E98100AEA867 /* minHeap.cpp */; };
 		C9F2A18B2CFFD88700CEA39A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F2A18A2CFFD88700CEA39A /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,15 +33,15 @@
 		C93E471F2CF7DAF300B5EBC7 /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = curl.xcframework; path = ../../Downloads/curl.xcframework; sourceTree = "<group>"; };
 		C970A0472CF3F0FB005E81A0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C98DB5112CF9849300A34309 /* libswiftCore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCore.tbd; path = usr/lib/swift/libswiftCore.tbd; sourceTree = SDKROOT; };
-		C98DB5142CF988C200A34309 /* maxHeap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = maxHeap.cpp; sourceTree = "<group>"; };
-		C98F42C12CF82E5700D546C5 /* redListScraper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = redListScraper.h; sourceTree = "<group>"; };
 		C98F42C22CF82E6100D546C5 /* minHeap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = minHeap.h; sourceTree = "<group>"; };
-		C98F42C32CF82E8800D546C5 /* maxHeap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = maxHeap.h; sourceTree = "<group>"; };
 		C98F42C42CF8300200D546C5 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		C98F42C62CF8341300D546C5 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		C98F42C82CF874A100D546C5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C996E4052CF7E67500C47795 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C996E4082CF80A3A00C47795 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C99705182D00E96100AEA867 /* quicksort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quicksort.h; sourceTree = "<group>"; };
+		C99705192D00E96800AEA867 /* quicksort.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = quicksort.cpp; sourceTree = "<group>"; };
+		C997051C2D00E98100AEA867 /* minHeap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = minHeap.cpp; sourceTree = "<group>"; };
 		C9F2A18A2CFFD88700CEA39A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,10 +80,10 @@
 			isa = PBXGroup;
 			children = (
 				C996E4082CF80A3A00C47795 /* Info.plist */,
-				C98F42C12CF82E5700D546C5 /* redListScraper.h */,
-				C98F42C32CF82E8800D546C5 /* maxHeap.h */,
 				C98F42C22CF82E6100D546C5 /* minHeap.h */,
-				C98DB5142CF988C200A34309 /* maxHeap.cpp */,
+				C99705182D00E96100AEA867 /* quicksort.h */,
+				C997051C2D00E98100AEA867 /* minHeap.cpp */,
+				C99705192D00E96800AEA867 /* quicksort.cpp */,
 				C938E9F52CF3DFD900B33F31 /* WildDex-Bridging-Header.h */,
 				C938E9E72CF3DD5000B33F31 /* WildDexApp.swift */,
 				C938E9E92CF3DD5000B33F31 /* ContentView.swift */,
@@ -186,13 +187,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C98DB5152CF988C200A34309 /* maxHeap.cpp in Sources */,
 				C9F2A18B2CFFD88700CEA39A /* SettingsView.swift in Sources */,
 				C938E9EA2CF3DD5000B33F31 /* ContentView.swift in Sources */,
 				C98F42C52CF8300200D546C5 /* ModelData.swift in Sources */,
+				C997051A2D00E96800AEA867 /* quicksort.cpp in Sources */,
 				C98F42C92CF874A100D546C5 /* LocationManager.swift in Sources */,
 				C970A0482CF3F0FB005E81A0 /* HomeView.swift in Sources */,
 				C98F42C72CF8341300D546C5 /* Species.swift in Sources */,
+				C997051D2D00E98100AEA867 /* minHeap.cpp in Sources */,
 				C938E9E82CF3DD5000B33F31 /* WildDexApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

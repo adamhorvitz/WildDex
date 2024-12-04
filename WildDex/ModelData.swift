@@ -19,17 +19,17 @@ class SpeciesData: ObservableObject {
         speciesForCountry = nil
     }
     
-    func getTopOfMaxHeap(num: Int = 10) async {
+    func heapSort(num: Int = 10) async {
         guard let species = speciesForCountry else { return }
         self.species = []
-        var speciesHeap = MaxHeap()
+        var speciesHeap = MinHeap()
         for animal in species.result {
-            speciesHeap.insert(SpeciesNode(id: std.string(String(animal.taxonid)), count: Int32(animal.taxonid)))
+            speciesHeap.insert(SpeciesNode(name: std.string(String(animal.scientific_name)), count: Int32(animal.taxonid)))
         }
         for _ in 0..<num {
-            let maxSpecies = speciesHeap.extractMax()
+            let minSpecies = speciesHeap.extractMin()
             do {
-                let speciesDetail = try await getSpeciesInfo(id: String(maxSpecies.id))
+                let speciesDetail = try await getSpeciesInfo(name: String(minSpecies.name))
                 self.species.append(speciesDetail)
             } catch {
                 print("error!!!!!")
@@ -37,9 +37,46 @@ class SpeciesData: ObservableObject {
         }
     }
     
-    func getSpeciesInfo(id: String) async throws -> SpeciesDetail {
+    func quickSort_(num: Int = 10) async {
+        var speciesNames = getNameVector()
+        var speciesIDs = getIDVector()
+        quickSort(&speciesNames, &speciesIDs, 0, Int32(speciesIDs.count - 1))
+        self.species = []
+        for i in 0..<num {
+            let speciesName = speciesNames[i]
+            print("species name:", String(speciesName))
+            do {
+                let speciesDetail = try await getSpeciesInfo(name: String(speciesName))
+                self.species.append(speciesDetail)
+            } catch {
+                print("another error :((((")
+            }
+        }
+    }
+    
+    func getNameVector() -> StringVector {
+        var vector = StringVector()
+        if let speciesList = speciesForCountry?.result {
+            for species in speciesList {
+                vector.push_back(std.string(species.scientific_name))
+            }
+        }
+        return vector
+    }
+    
+    func getIDVector() -> IntVector {
+        var vector = IntVector()
+        if let speciesList = speciesForCountry?.result {
+            for species in speciesList {
+                vector.push_back(Int32(species.taxonid))
+            }
+        }
+        return vector
+    }
+    
+    func getSpeciesInfo(name: String) async throws -> SpeciesDetail {
         let apiKey = "9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"
-        if let url = URL(string: "https://apiv3.iucnredlist.org/api/v3/species/id/\(id)?token=\(apiKey)") {
+        if let url = URL(string: "https://apiv3.iucnredlist.org/api/v3/species/\(name)?token=\(apiKey)") {
             let request = URLRequest(url: url)
             do {
                 let (data, _) = try await URLSession.shared.data(for: request)

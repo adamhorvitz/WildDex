@@ -35,14 +35,14 @@ struct WildDexApp: App {
                             self.country = country
                             print("country source:", self.country)
                             await speciesData.loadSpecies(for: country)
-                            await speciesData.getTopOfMaxHeap()
+                            await speciesData.heapSort()
                             dataLoaded = true
                         }
                     } catch {
                         UserDefaults.standard.set(false, forKey: "useCurrentLocation")
                         useCurrentLocation = false
                         await speciesData.loadSpecies(for: country)
-                        await speciesData.getTopOfMaxHeap()
+                        await speciesData.heapSort()
                         dataLoaded = true
                     }
                 }

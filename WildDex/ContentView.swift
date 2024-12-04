@@ -38,8 +38,10 @@ struct ContentView: View {
                     print("loadedCountry:", loadedCountry)
                     print("current country:", country)
                     if country != loadedCountry {
+                        dataLoaded = false
                         await speciesData.loadSpecies(for: country)
-                        await speciesData.getTopOfMaxHeap()
+                        await speciesData.heapSort()
+                        dataLoaded = true
                     }
                 }
             }
