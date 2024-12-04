@@ -7,13 +7,14 @@ int main() {
 
     std::cout << "Starting Red List Scraper Test...\n";
 
-    int result = fetchRedListData(apiToken);
+    int result1 = fetchHeapSort(apiToken);
+    int result2 = fetchQuickSort(apiToken);
 
-    if (result == 0) {
+    if (result1 == 0 && result2 == 0) {
         std::cout << "\nRed List Scraper executed successfully.\n";
     } else {
         std::cerr << "\nRed List Scraper encountered an error.\n";
     }
 
-    return result;
+    return result1;
 }

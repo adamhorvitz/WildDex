@@ -11,9 +11,7 @@ using namespace std;
 // Species structure to hold species data
 struct SpeciesNode {
     string name;
-    double latitude;
-    double longitude;
-    double distance;
+    int count;
 };
 
 // Min Heap class for Species

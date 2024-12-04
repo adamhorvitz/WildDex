@@ -3,13 +3,13 @@
  https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/
  */
 
-#include "MinHeap.h"
+#include "minHeap.h"
 
 // Private method: Heapify up
 void MinHeap::heapifyUp(int index) {
     while (index > 0) {
         int parentIndex = (index - 1) / 2;
-        if (heap[parentIndex].distance > heap[index].distance) {
+        if (heap[parentIndex].name > heap[index].name) {
             swap(heap[parentIndex], heap[index]);
             index = parentIndex;
         } else {
@@ -26,10 +26,10 @@ void MinHeap::heapifyDown(int index) {
         int leftChild = 2 * index + 1;
         int rightChild = 2 * index + 2;
 
-        if (leftChild < size && heap[leftChild].distance < heap[smallest].distance) {
+        if (leftChild < size && heap[leftChild].name < heap[smallest].name) {
             smallest = leftChild;
         }
-        if (rightChild < size && heap[rightChild].distance < heap[smallest].distance) {
+        if (rightChild < size && heap[rightChild].name < heap[smallest].name) {
             smallest = rightChild;
         }
 
@@ -68,6 +68,7 @@ bool MinHeap::isEmpty() const {
 }
 
 // Function to calculate distance between two geographical points
+/*
 double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
     const double R = 6371.0; // Radius of Earth in kilometers
     double dLat = (lat2 - lat1) * M_PI / 180.0;
@@ -84,8 +85,10 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
 
     return R * c; // Distance in kilometers
 }
+*/
 
 // Function to create a MinHeap of endangered species sorted by distance
+/*
 MinHeap createEndangeredSpeciesHeap(const vector<SpeciesNode>& species, double userLat, double userLon) {
     MinHeap heap;
     for (const auto& s : species) {
@@ -95,3 +98,5 @@ MinHeap createEndangeredSpeciesHeap(const vector<SpeciesNode>& species, double u
     }
     return heap;
 }
+
+*/
