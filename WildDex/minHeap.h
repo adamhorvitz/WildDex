@@ -1,4 +1,3 @@
-/*
 #ifndef MINHEAP_H
 #define MINHEAP_H
 
@@ -36,4 +35,3 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2);
 MinHeap createEndangeredSpeciesHeap(const vector<SpeciesNode>& species, double userLat, double userLon);
 
 #endif // MINHEAP_H
-*/
