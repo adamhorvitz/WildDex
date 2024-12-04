@@ -81,6 +81,31 @@ int fetchRedListData(const std::string& apiToken) {
 
 //_____________________________
 //TODO create quick sort for alpabetical species names
+//reference: https://www.geeksforgeeks.org/quick-sort-algorithm/
+int pivotLogic(vector<int>& nameArray, int low, int high) {
+    //preset pivot point
+    int pivot = nameArray[high];
+    int index = low - 1;
+
+    for (int i = low; i <= high - 1; i++) {
+        if(nameArray[i] < pivot) {
+            index++;
+            swap(nameArray[index], nameArray[i]);
+        }
+    }
+    swap(nameArray[index + 1], nameArray[high]);
+    return index + 1;
+}
+
+void quickSort(vector<int>& nameArray, int low, int high) {
+    if (low < high) {
+        int separation = pivotLogic(nameArray, low, high);
+
+        //recursion for element calls
+        quickSort(nameArray, low, separation - 1);
+        quickSort(nameArray, separation + 1, high);
+    }
+}
 //_____________________________
 
 // helper function to fetch common name for a species (DOES NOT WORK RIGHT NOW)
