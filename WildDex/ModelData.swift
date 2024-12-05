@@ -38,24 +38,22 @@ class SpeciesData: ObservableObject {
     }
     
     func quickSort_(num: Int = 10) async {
-//        var speciesNames = getNameVector()
-//        var speciesIDs = getIDVector()
-//        quickSort(&speciesNames, &speciesIDs, 0, Int32(speciesIDs.count - 1))
+        print("quick sort sorted!")
         guard let species = speciesForCountry else { return }
         self.species = []
         var speciesManager = SpeciesManager()
         for creature in species.result {
             speciesManager.addSpecies(std.string(String(creature.scientific_name)), Int32(creature.taxonid))
         }
-        for i in 0..<num {
-//            let speciesName = speciesNames[i]
+        for _ in 0..<num {
+            let speciesName = speciesManager.getSpeciesAndRemove(0)
 //            print("species name:", String(speciesName))
-//            do {
-//                let speciesDetail = try await getSpeciesInfo(name: String(speciesName))
-//                self.species.append(speciesDetail)
-//            } catch {
-//                print("another error :((((")
-//            }
+            do {
+                let speciesDetail = try await getSpeciesInfo(name: String(speciesName))
+                self.species.append(speciesDetail)
+            } catch {
+                print("another error :((((")
+            }
         }
     }
     
