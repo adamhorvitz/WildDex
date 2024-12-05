@@ -107,9 +107,10 @@ int fetchQuickSort(const std::string& apiToken) {
         return 1;
     }
 
-    vector<string> speciesNames;
+    /*vector<string> speciesNames;
     vector<int> speciesIDs;
-
+*/
+    SpeciesManager speciesManager;
     //collect species names
     for (const auto& species : parsedData["result"]) {
         std::string scientificName = species.value("scientific_name", "Unknown");
@@ -118,18 +119,22 @@ int fetchQuickSort(const std::string& apiToken) {
 
         // critically endangered species only
         if (category == "CR") {
-            speciesNames.push_back(scientificName);
-            speciesIDs.push_back(taxonID);
+            //speciesNames.push_back(scientificName);
+            speciesManager.addSpecies(scientificName, taxonID);
         }
     }
     //sort species
-    quickSort(speciesNames, speciesIDs, 0, speciesNames.size() - 1);
+    //quickSort(speciesNames, speciesIDs, 0, speciesNames.size() - 1);
+    speciesManager.sortSpecies();
+
+    //display sorted species data
+    speciesManager.printSortedSpecies();
 
     // display species in vector as descending order of count
-    std::cout << "\nQUICK SORT: Critically Endangered Species in the United States ordered by descending count:\n";
+   /* std::cout << "\nQUICK SORT: Critically Endangered Species in the United States ordered by descending count:\n";
     for (size_t i = 0; i < speciesNames.size(); i++) {
         std::cout << speciesNames[i] << " with ID: " << speciesIDs[i] << std::endl;
-    }
+    }*/
 
     return 0;
 }

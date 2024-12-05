@@ -1,32 +1,51 @@
-#include <string>
-#include <vector>
 #include "quicksort.h"
+#include <algorithm>
 
 using namespace std;
 
-//reference: https://www.geeksforgeeks.org/quick-sort-algorithm/
-int pivotLogic(vector<string>& names, vector<int>& ids, int low, int high) {
-    //preset pivot point
-    string pivot = names[high];
-    int index = low - 1;
+// Partition logic for quicksort (using names)
+int SpeciesManager::partition(int low, int high) {
+    string pivot = speciesNames[high]; // Pivot based on name
+    int i = low - 1;
 
-    for (int i = low; i <= high - 1; i++) {
-        if(names[i] < pivot) {
-            index++;
-            swap(names[index], names[i]);
-            swap(ids[index], ids[i]);
+    for (int j = low; j < high; j++) {
+        if (speciesNames[j] < pivot) { // Alphabetical comparison
+            i++;
+            swap(speciesNames[i], speciesNames[j]);
+            swap(speciesIDs[i], speciesIDs[j]);
         }
     }
-    swap(names[index + 1], names[high]);
-    swap(ids[index + 1], ids[high]);
-    return index + 1;
+    swap(speciesNames[i + 1], speciesNames[high]);
+    swap(speciesIDs[i + 1], speciesIDs[high]);
+    return i + 1;
 }
-void quickSort(vector<string>& names, vector<int>& ids, int low, int high) {
-    if (low < high) {
-        int separation = pivotLogic(names, ids, low, high);
 
-        //recursion for element calls
-        quickSort(names, ids, low, separation - 1);
-        quickSort(names, ids, separation + 1, high);
+// QuickSort function
+void SpeciesManager::quickSort(int low, int high) {
+    if (low < high) {
+        int pi = partition(low, high);
+
+        // Recursive calls
+        quickSort(low, pi - 1);
+        quickSort(pi + 1, high);
+    }
+}
+
+// Function to add species
+void SpeciesManager::addSpecies(const string& name, int id) {
+    speciesNames.push_back(name);
+    speciesIDs.push_back(id);
+}
+
+// Function to sort species alphabetically
+void SpeciesManager::sortSpecies() {
+    quickSort(0, speciesNames.size() - 1);
+}
+
+// Function to retrieve and print sorted species
+void SpeciesManager::printSortedSpecies() const {
+    cout << "\nSorted Critically Endangered Species:\n";
+    for (size_t i = 0; i < speciesNames.size(); i++) {
+        cout << "Name: " << speciesNames[i] << ", ID: " << speciesIDs[i] << endl;
     }
 }
