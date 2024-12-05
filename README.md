@@ -8,3 +8,7 @@ To use the app, install Xcode or Swift Playgrounds on your MacBook or iPad. Then
 
 ### Demo
 Video: https://youtube.com/shorts/LorygWUA7wM?feature=share
+
+### Sources
+- [IUCN Red List API](https://apiv3.iucnredlist.org)
+- Apple's location APIs
