@@ -23,8 +23,8 @@ class SpeciesData: ObservableObject {
         guard let species = speciesForCountry else { return }
         self.species = []
         var speciesHeap = MinHeap()
-        for animal in species.result {
-            speciesHeap.insert(SpeciesNode(name: std.string(String(animal.scientific_name)), count: Int32(animal.taxonid)))
+        for creature in species.result {
+            speciesHeap.insert(SpeciesNode(name: std.string(String(creature.scientific_name)), count: Int32(creature.taxonid)))
         }
         for _ in 0..<num {
             let minSpecies = speciesHeap.extractMin()
@@ -38,41 +38,46 @@ class SpeciesData: ObservableObject {
     }
     
     func quickSort_(num: Int = 10) async {
-        var speciesNames = getNameVector()
-        var speciesIDs = getIDVector()
-        quickSort(&speciesNames, &speciesIDs, 0, Int32(speciesIDs.count - 1))
+//        var speciesNames = getNameVector()
+//        var speciesIDs = getIDVector()
+//        quickSort(&speciesNames, &speciesIDs, 0, Int32(speciesIDs.count - 1))
+        guard let species = speciesForCountry else { return }
         self.species = []
+        var speciesManager = SpeciesManager()
+        for creature in species.result {
+            speciesManager.addSpecies(std.string(String(creature.scientific_name)), Int32(creature.taxonid))
+        }
         for i in 0..<num {
-            let speciesName = speciesNames[i]
-            print("species name:", String(speciesName))
-            do {
-                let speciesDetail = try await getSpeciesInfo(name: String(speciesName))
-                self.species.append(speciesDetail)
-            } catch {
-                print("another error :((((")
-            }
+//            let speciesName = speciesNames[i]
+//            print("species name:", String(speciesName))
+//            do {
+//                let speciesDetail = try await getSpeciesInfo(name: String(speciesName))
+//                self.species.append(speciesDetail)
+//            } catch {
+//                print("another error :((((")
+//            }
         }
     }
     
-    func getNameVector() -> StringVector {
-        var vector = StringVector()
-        if let speciesList = speciesForCountry?.result {
-            for species in speciesList {
-                vector.push_back(std.string(species.scientific_name))
-            }
-        }
-        return vector
-    }
-    
-    func getIDVector() -> IntVector {
-        var vector = IntVector()
-        if let speciesList = speciesForCountry?.result {
-            for species in speciesList {
-                vector.push_back(Int32(species.taxonid))
-            }
-        }
-        return vector
-    }
+//    func getNameVector() -> StringVector {
+//        var vector = StringVector()
+//        if let speciesList = speciesForCountry?.result {
+//            for species in speciesList {
+//                vector.push_back(std.string(species.scientific_name))
+//            }
+//        }
+//        return vector
+//    }
+//    
+//    func getIDVector() -> IntVector {
+//        var vector = IntVector()
+//        if let speciesList = speciesForCountry?.result {
+//            for species in speciesList {
+//                vector.push_back(Int32(species.taxonid))
+//            }
+//        }
+//        return vector
+//    }
     
     func getSpeciesInfo(name: String) async throws -> SpeciesDetail {
         let apiKey = "9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"
