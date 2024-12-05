@@ -25,5 +25,7 @@ public:
 
     // Function to retrieve and print sorted species
     void printSortedSpecies() const;
+
+    std::pair<std::string, int> getSpeciesAndRemove(int index);
 };
 
