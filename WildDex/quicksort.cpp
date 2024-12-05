@@ -49,3 +49,19 @@ void SpeciesManager::printSortedSpecies() const {
         cout << "Name: " << speciesNames[i] << ", ID: " << speciesIDs[i] << endl;
     }
 }
+
+std::pair<std::string, int> SpeciesManager::getSpeciesAndRemove(int index) {
+    if (index >= 0 && index < speciesNames.size()) {
+        std::string name = speciesNames[index];
+        int id = speciesIDs[index];
+
+        // Remove the species at the specified index
+        speciesNames.erase(speciesNames.begin() + index);
+        speciesIDs.erase(speciesIDs.begin() + index);
+
+        return {name, id};
+    } else {
+        // Return a default pair if index is out of bounds
+        return {"", -1};
+    }
+}
