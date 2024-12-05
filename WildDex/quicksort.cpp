@@ -50,7 +50,7 @@ void SpeciesManager::printSortedSpecies() const {
     }
 }
 
-std::pair<std::string, int> SpeciesManager::getSpeciesAndRemove(int index) {
+std::string SpeciesManager::getSpeciesAndRemove(int index) {
     if (index >= 0 && index < speciesNames.size()) {
         std::string name = speciesNames[index];
         int id = speciesIDs[index];
@@ -59,9 +59,10 @@ std::pair<std::string, int> SpeciesManager::getSpeciesAndRemove(int index) {
         speciesNames.erase(speciesNames.begin() + index);
         speciesIDs.erase(speciesIDs.begin() + index);
 
-        return {name, id};
+        return name;
+
     } else {
         // Return a default pair if index is out of bounds
-        return {"", -1};
+        return "";
     }
 }
